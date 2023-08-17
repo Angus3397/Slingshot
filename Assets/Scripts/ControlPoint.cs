@@ -4,49 +4,70 @@ using UnityEngine;
 
 public class ControlPoint : MonoBehaviour
 {
-    float xRotate, yRotate = 0f;
+    [SerializeField] private Rigidbody playerBall;
+    [SerializeField] private LineRenderer aimLine;
 
-    public Rigidbody playerBall;
-
-    public float rotateSpeed = 5f;
-
-    public float shotPower = 5f;
-
-    public LineRenderer aimLine;
+    private float xRotate, yRotate = 0f;
+    private float rotateSpeed = 5f;
+    private float shotPower = 20f;
+    private float stopVelocity = 3f;
+    
+    private bool isFlying = false;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        // Stops the ball when it's almost stopped
+        if (playerBall.velocity.magnitude < stopVelocity)
+        {
+            Stop();
+        }
+        AimAndShoot();
+    }
+
+    private void AimAndShoot() 
     {
         transform.position = playerBall.position;
 
         // Controls the player camera
-        if (Input.GetMouseButton(0)) 
+        if (Input.GetMouseButton(1))
         {
             xRotate += Input.GetAxis("Mouse X") * rotateSpeed;
             yRotate += Input.GetAxis("Mouse Y") * rotateSpeed;
-            if (yRotate < -35f) 
+
+            if (yRotate > 20f)
             {
-                yRotate = -35f;
+                yRotate = 20f;
             }
-            /*if (yRotate > 11f)
+            else if (yRotate < -150f)
             {
-                yRotate = 11f;
+                yRotate = -150f;
             }
-            else if (yRotate < -170f) 
+            transform.rotation = Quaternion.Euler(-yRotate, xRotate, 0f);
+
+            // Hold to ready fire
+            if (Input.GetMouseButton(0) && isFlying == false)
             {
-                yRotate = -170f;
-            }*/
-            transform.rotation = Quaternion.Euler(yRotate, xRotate, 0f);
-            aimLine.gameObject.SetActive(true);
-            aimLine.SetPosition(0, transform.position);
-            aimLine.SetPosition(1, transform.position + transform.forward * 7f);
+                aimLine.gameObject.SetActive(true);
+                aimLine.SetPosition(0, transform.position);
+                aimLine.SetPosition(1, transform.position + transform.forward * 10f);
+            }
         }
 
-        // Shooting function
-        if (Input.GetMouseButtonUp(0)) 
+        // Release to shoot
+        if (Input.GetMouseButtonUp(0) && isFlying == false)
         {
             playerBall.velocity = transform.forward * shotPower;
             aimLine.gameObject.SetActive(false);
+            isFlying = true;
         }
+    }
+
+    // Stops the ball
+    private void Stop() 
+    {
+        playerBall.velocity = Vector3.zero;
+        playerBall.angularVelocity = Vector3.zero;
+        isFlying = false;
     }
 }
