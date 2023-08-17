@@ -10,7 +10,7 @@ public class ControlPoint : MonoBehaviour
     private float xRotate, yRotate = 0f;
     private float rotateSpeed = 5f;
     private float shotPower = 20f;
-    private float stopVelocity = 3f;
+    private float stopVelocity = 10f;
     
     private bool isFlying = false;
 
@@ -35,9 +35,9 @@ public class ControlPoint : MonoBehaviour
             xRotate += Input.GetAxis("Mouse X") * rotateSpeed;
             yRotate += Input.GetAxis("Mouse Y") * rotateSpeed;
 
-            if (yRotate > 20f)
+            if (yRotate > 15f)
             {
-                yRotate = 20f;
+                yRotate = 15f;
             }
             else if (yRotate < -150f)
             {
@@ -45,13 +45,16 @@ public class ControlPoint : MonoBehaviour
             }
             transform.rotation = Quaternion.Euler(-yRotate, xRotate, 0f);
 
-            // Hold to ready fire
-            if (Input.GetMouseButton(0) && isFlying == false)
-            {
-                aimLine.gameObject.SetActive(true);
-                aimLine.SetPosition(0, transform.position);
-                aimLine.SetPosition(1, transform.position + transform.forward * 10f);
-            }
+            // Aiming Line indicates direction and able to be shot
+            
+        }
+
+        // Hold to ready the ball to be launched and 
+        if (Input.GetMouseButton(0) && isFlying == false)
+        {
+            aimLine.gameObject.SetActive(true);
+            aimLine.SetPosition(0, transform.position);
+            aimLine.SetPosition(1, transform.position + transform.forward * 10f);
         }
 
         // Release to shoot
