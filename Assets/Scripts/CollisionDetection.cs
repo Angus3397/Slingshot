@@ -7,14 +7,16 @@ public class CollisionDetection : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If point cubes are hit
-        if (other.gameObject.tag == "Points") 
+        if (other.gameObject.tag == "Points")
         {
             Destroy(other.gameObject);
+            ScoreManager.instance.AddPoint();
         }
 
         // If end cubes are hit
 
 
         // If spikes are hit
+
     }
 }
