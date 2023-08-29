@@ -10,9 +10,11 @@ public class ControlPoint : MonoBehaviour
     private float xRotate, yRotate = 0f;
     private float rotateSpeed = 5f;
     private float shotPower = 20f;
-    private float stopVelocity = 10f;
+    private float stopVelocity = 7f;
     
     private bool isFlying = false;
+
+    private Vector3 savedPos;
 
     // Update is called once per frame
     private void Update()
@@ -22,6 +24,14 @@ public class ControlPoint : MonoBehaviour
         {
             Stop();
         }
+
+        if (playerBall.position.y < -5f) 
+        {
+            playerBall.transform.position = savedPos;
+            Stop();
+            playerBall.velocity = Vector3.zero;
+        }
+
         AimAndShoot();
     }
 
@@ -60,7 +70,7 @@ public class ControlPoint : MonoBehaviour
         // Release to shoot
         if (Input.GetMouseButtonUp(0) && isFlying == false)
         {
-            playerBall.velocity = transform.forward * shotPower;
+            playerBall.velocity = transform.forward * shotPower + transform.up;
             aimLine.gameObject.SetActive(false);
             isFlying = true;
         }
@@ -69,8 +79,11 @@ public class ControlPoint : MonoBehaviour
     // Stops the ball
     private void Stop() 
     {
-        playerBall.velocity = Vector3.zero;
         playerBall.angularVelocity = Vector3.zero;
         isFlying = false;
+        if (playerBall.velocity == Vector3.zero)
+        {
+            savedPos = playerBall.transform.position;
+        }
     }
 }
