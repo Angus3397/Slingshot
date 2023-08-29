@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/SplashScreen.unity
-    guid: 98ae63586492a984a89966f08dfc818d
+    guid: 8a1b1656ed028784394fdc1f205b1480
   - enabled: 1
     path: Assets/Scenes/StartScreen.unity
     guid: d2630f469bd6bab48b4b2bf352394e39

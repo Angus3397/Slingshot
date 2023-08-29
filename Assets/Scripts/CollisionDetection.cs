@@ -14,7 +14,10 @@ public class CollisionDetection : MonoBehaviour
         }
 
         // If end cubes are hit
-
+        if (other.gameObject.tag == "End")
+        {
+            ScoreManager.instance.GameOverScreen();
+        }
 
         // If spikes are hit
 
