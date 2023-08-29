@@ -10,6 +10,7 @@ public class ControlPoint : MonoBehaviour
     private float xRotate, yRotate = 0f;
     private float rotateSpeed = 5f;
     private float shotPower = 20f;
+    private float shotAngle = 5f;
     private float stopVelocity = 7f;
     
     private bool isFlying = false;
@@ -70,7 +71,7 @@ public class ControlPoint : MonoBehaviour
         // Release to shoot
         if (Input.GetMouseButtonUp(0) && isFlying == false)
         {
-            playerBall.velocity = transform.forward * shotPower + transform.up;
+            playerBall.velocity = transform.forward * shotPower + transform.up * shotAngle;
             aimLine.gameObject.SetActive(false);
             isFlying = true;
         }
@@ -80,10 +81,10 @@ public class ControlPoint : MonoBehaviour
     private void Stop() 
     {
         playerBall.angularVelocity = Vector3.zero;
-        isFlying = false;
         if (playerBall.velocity == Vector3.zero)
         {
             savedPos = playerBall.transform.position;
         }
+        isFlying = false;
     }
 }
