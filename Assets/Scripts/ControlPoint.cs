@@ -65,7 +65,7 @@ public class ControlPoint : MonoBehaviour
         {
             aimLine.gameObject.SetActive(true);
             aimLine.SetPosition(0, transform.position);
-            aimLine.SetPosition(1, transform.position + transform.forward * 10f);
+            aimLine.SetPosition(1, transform.position + transform.up + transform.forward * 5f);
         }
 
         // Release to shoot
