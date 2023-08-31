@@ -4,23 +4,6 @@ using UnityEngine;
 
 public class CollisionDetection : MonoBehaviour
 {
-    /*[SerializeField] Rigidbody player;
-    private Vector3 savedPos;
-    private float stopVelocity = 10f;*/
-
-    /*private void Update()
-    {
-        if (player.velocity.magnitude < stopVelocity) 
-        {
-            savedPos = transform.position;
-        }
-
-        if (player.position.y < -1f) 
-        {
-            transform.position = savedPos;
-        }
-    }*/
-
     private void OnTriggerEnter(Collider other)
     {
         // If point cubes are hit

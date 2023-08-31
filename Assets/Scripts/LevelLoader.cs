@@ -23,13 +23,25 @@ public class LevelLoader : MonoBehaviour
 
     public void OnButtonClick()
     {
-        if (button.gameObject.name == "EnterMenu") 
+        if (button.gameObject.name == "EnterMenu")
         {
             StartCoroutine(LoadLevel(1));
         }
-        else if (button.gameObject.name == "Start") 
+        else if (button.gameObject.name == "Start")
         {
             StartCoroutine(LoadLevel(2));
+        }
+        else if (button.gameObject.name == "Next") 
+        {
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        }
+        else if (button.gameObject.name == "Menu")
+        {
+            StartCoroutine(LoadLevel(1));
+        }
+        else if (button.gameObject.name == "Retry")
+        {
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
         }
     }
 

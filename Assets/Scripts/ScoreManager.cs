@@ -8,7 +8,6 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     public Text scoreText;
-    //public Text highscoreText;
 
     public GameOver gameOver;
 
@@ -25,7 +24,6 @@ public class ScoreManager : MonoBehaviour
     {
         highscore = PlayerPrefs.GetInt("highscore", 0);
         scoreText.text = "Points: " + score.ToString();
-        //highscoreText.text = "HIGHSCORE: " + highscore.ToString();
     }
 
     public void AddPoint() 
