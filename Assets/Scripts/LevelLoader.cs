@@ -35,13 +35,17 @@ public class LevelLoader : MonoBehaviour
         {
             StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
         }
-        else if (button.gameObject.name == "Menu")
+        else if (button.gameObject.name == "Menu" || button.gameObject.name == "Return")
         {
             StartCoroutine(LoadLevel(1));
         }
         else if (button.gameObject.name == "Retry")
         {
             StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+        }
+        else if (button.gameObject.name == "Quit") 
+        {
+            Application.Quit();
         }
     }
 
